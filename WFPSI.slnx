@@ -1,0 +1,8 @@
+<Solution>
+  <Project Path="PSI.BLL/PSI.BLL.csproj" Id="d47f34de-ed07-4276-b592-0f0945943b92" />
+  <Project Path="PSI.Common/PSI.Common.csproj" Id="2cdd392c-fa40-443c-99fb-3940d748c14e" />
+  <Project Path="WFPSI.csproj" Id="999e8dc3-d882-42bd-bec8-c88005b78ada" />
+  <Project Path="PSI.DAL/PSI.DAL.csproj" Id="77c4bed1-e9c7-4c04-a7a0-7cd6e8b9d2d3" />
+  <Project Path="PSI.DB/PSI.DB.csproj" Id="2104c108-d17c-4bdd-b30d-40f4df92d2a2" />
+  <Project Path="PSI.Models/PSI.Models.csproj" Id="994497a0-4c34-4cea-9831-fd282c2fbd20" />
+</Solution>
