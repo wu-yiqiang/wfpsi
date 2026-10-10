@@ -1,6 +1,6 @@
 ﻿namespace WFPSI
 {
-    partial class Login_From
+    partial class Login_Form
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.Button login;
             System.Windows.Forms.Button handle_exit;
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login_From));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login_Form));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.account = new System.Windows.Forms.TextBox();
@@ -97,6 +97,7 @@
             this.account.Name = "account";
             this.account.Size = new System.Drawing.Size(467, 50);
             this.account.TabIndex = 4;
+            this.account.Text = "admin";
             // 
             // password
             // 
@@ -108,6 +109,7 @@
             this.password.PasswordChar = '*';
             this.password.Size = new System.Drawing.Size(467, 50);
             this.password.TabIndex = 5;
+            this.password.Text = "admin";
             // 
             // contextMenuStrip1
             // 
@@ -117,6 +119,7 @@
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.Controls.Add(this.password);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.label2);
@@ -148,12 +151,13 @@
             this.logoBox.TabIndex = 9;
             this.logoBox.TabStop = false;
             // 
-            // Login_From
+            // Login_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.SystemColors.Control;
+            this.BackgroundImage = global::WFPSI.Properties.Resources.lbg;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(1220, 805);
             this.Controls.Add(this.logoBox);
@@ -166,10 +170,10 @@
             this.Margin = new System.Windows.Forms.Padding(6);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Login_From";
+            this.Name = "Login_Form";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "WFPSI";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Text = "鼎飞进销存管理系统";
+            this.Load += new System.EventHandler(this.Login_Form_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logoBox)).EndInit();

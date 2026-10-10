@@ -41,7 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseDAL.cs" />
+    <Compile Include="BQuery.cs" />
+    <Compile Include="CreateSql.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SqlModel.cs" />
+    <Compile Include="UserDAL.cs" />
+    <Compile Include="ViewUserRoleDAL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PSI.Common\PSI.Common.csproj">

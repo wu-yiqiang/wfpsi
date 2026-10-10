@@ -16,7 +16,7 @@ namespace WFPSI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Login_From());
+            Application.Run(new Login_Form());
         }
     }
 }
