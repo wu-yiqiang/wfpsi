@@ -72,7 +72,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("宋体", 14F);
-            this.label1.Location = new System.Drawing.Point(289, 100);
+            this.label1.Location = new System.Drawing.Point(263, 100);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(93, 38);
             this.label1.TabIndex = 2;
@@ -83,7 +83,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("宋体", 14F);
-            this.label2.Location = new System.Drawing.Point(289, 242);
+            this.label2.Location = new System.Drawing.Point(263, 242);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(93, 38);
             this.label2.TabIndex = 3;
@@ -92,7 +92,7 @@
             // account
             // 
             this.account.Font = new System.Drawing.Font("宋体", 14F);
-            this.account.Location = new System.Drawing.Point(413, 97);
+            this.account.Location = new System.Drawing.Point(383, 100);
             this.account.MaxLength = 50;
             this.account.Name = "account";
             this.account.Size = new System.Drawing.Size(467, 50);
@@ -103,7 +103,7 @@
             // 
             this.password.Font = new System.Drawing.Font("宋体", 14F);
             this.password.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.password.Location = new System.Drawing.Point(413, 230);
+            this.password.Location = new System.Drawing.Point(383, 239);
             this.password.MaxLength = 50;
             this.password.Name = "password";
             this.password.PasswordChar = '*';
@@ -134,7 +134,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("宋体", 18F, System.Drawing.FontStyle.Bold);
-            this.label3.Location = new System.Drawing.Point(445, 85);
+            this.label3.Location = new System.Drawing.Point(441, 102);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(363, 48);
             this.label3.TabIndex = 8;
@@ -158,7 +158,7 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImage = global::WFPSI.Properties.Resources.lbg;
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1220, 805);
             this.Controls.Add(this.logoBox);
             this.Controls.Add(this.label3);

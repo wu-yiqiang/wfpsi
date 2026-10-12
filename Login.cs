@@ -25,8 +25,8 @@ namespace WFPSI
 
         private void Login_Form_Load(object sender, EventArgs e)
         {
-            password.Clear();
-            account.Clear();
+            //password.Clear();
+            //account.Clear();
         }
 
         private void label1_Click(object sender, EventArgs e)
