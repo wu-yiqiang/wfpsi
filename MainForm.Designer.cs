@@ -29,47 +29,18 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
             this.loginTime = new System.Windows.Forms.Label();
             this.user = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.tabControl1.SuspendLayout();
+            this.PSIMenus = new System.Windows.Forms.MenuStrip();
+            this.PSITools = new System.Windows.Forms.ToolStrip();
+            this.tcPages = new System.Windows.Forms.TabControl();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.panel1.SuspendLayout();
+            this.PSITools.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(12, 275);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(200, 100);
-            this.tabControl1.TabIndex = 0;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Location = new System.Drawing.Point(8, 39);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(184, 53);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(8, 39);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(184, 53);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
@@ -124,35 +95,79 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "操作人： ";
             // 
+            // PSIMenus
+            // 
+            this.PSIMenus.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
+            this.PSIMenus.ImageScalingSize = new System.Drawing.Size(32, 32);
+            this.PSIMenus.Location = new System.Drawing.Point(0, 0);
+            this.PSIMenus.Name = "PSIMenus";
+            this.PSIMenus.Size = new System.Drawing.Size(1411, 24);
+            this.PSIMenus.TabIndex = 2;
+            this.PSIMenus.Text = "menuStrip1";
+            // 
+            // PSITools
+            // 
+            this.PSITools.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.PSITools.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton1});
+            this.PSITools.Location = new System.Drawing.Point(0, 24);
+            this.PSITools.Name = "PSITools";
+            this.PSITools.Size = new System.Drawing.Size(1411, 30);
+            this.PSITools.TabIndex = 3;
+            this.PSITools.Text = "toolStrip1";
+            // 
+            // tcPages
+            // 
+            this.tcPages.Location = new System.Drawing.Point(13, 96);
+            this.tcPages.Name = "tcPages";
+            this.tcPages.SelectedIndex = 0;
+            this.tcPages.Size = new System.Drawing.Size(1398, 641);
+            this.tcPages.TabIndex = 4;
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(46, 24);
+            this.toolStripButton1.Text = "toolStripButton1";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1411, 809);
+            this.Controls.Add(this.tcPages);
+            this.Controls.Add(this.PSITools);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.PSIMenus);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.PSIMenus;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "鼎飞进销存管理系统";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
-            this.tabControl1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.PSITools.ResumeLayout(false);
+            this.PSITools.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label user;
         private System.Windows.Forms.Label loginTime;
+        private System.Windows.Forms.MenuStrip PSIMenus;
+        private System.Windows.Forms.ToolStrip PSITools;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.TabControl tcPages;
     }
 }

@@ -14,15 +14,13 @@ namespace WFPSI.DAL
 
         public List<MenuInfoModel> GetMenuList(string roleIds)
         {
-            string strWhere = "";
+            string strWhere = "1=1 ";
+            string cols = "MId,MName,ParentId,MKey,MKey,MUrl,IsTop";
             if (string.IsNullOrEmpty(roleIds))
             {
-                strWhere = " order by MOrder";
-            }else
-            {
-                strWhere = $" MId in (select MId from RoleMenuInfos where RoleId in ({roleIds})) order by MOrder";
-            }
-            string cols = "MId,MName,ParentId,MKey,MKey,MUrl,IsTop";
+                strWhere += $" and MId in (select MId from RoleMenuInfos where RoleId in ({roleIds}))";
+            } 
+            strWhere += " order by MOrder";
             return GetModelList(strWhere, cols);
         }
 

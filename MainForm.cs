@@ -4,8 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Remoting;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -23,6 +25,7 @@ namespace WFPSI
         }
         List<ViewUserRoleModel> urList = null;
         private MenuBLL menuBLL = new MenuBLL();
+        private ToolMenuBLL toolMenuBLL = new ToolMenuBLL();
         string uName = "";
         bool isAdmin = false;
 
@@ -38,24 +41,171 @@ namespace WFPSI
             act.TryCatch("页面初始化失败");
         }
 
+        private void AddToolMenuItem(List<ToolMenuInfoModel> toolList)
+        {
+            List<int> groupIds = new List<int>();
+            foreach (var ti in toolList)
+            {
+                Debug.WriteLine(ti.TGroupId);
+                if (!groupIds.Contains(ti.TGroupId))
+                {
+                    groupIds.Add(ti.TGroupId);
+                }
+            }
+            foreach (var groupId in groupIds)
+            {
+                var gTools = toolList.Where(t => t.TGroupId == groupId);
+                foreach (var tmi in gTools)
+                {
+                    ToolStripButton tsbtn = new ToolStripButton();
+                    tsbtn.Text = tmi.TMenuName;
+                    tsbtn.Name = tmi.TMenuId.ToString();
+                    if (!string.IsNullOrEmpty(tmi.TMPic)) tsbtn.Image = Image.FromFile(Application.StartupPath + '/' + tmi.TMPic);
+                    tsbtn.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
+                    tsbtn.TextImageRelation = TextImageRelation.ImageBeforeText;
+                    tsbtn.Tag = tmi;
+                    tsbtn.Click += Tsbtn_Click;
+                    PSITools.Items.Add(tsbtn);
+
+                }
+                if (gTools.ToList().Count > 0) {
+                    ToolStripSeparator sp = new ToolStripSeparator();
+                    PSITools.Items.Add(sp);
+                }
+            }
+        }
+
+        private void Tsbtn_Click(object sender, EventArgs e)
+        {
+            ToolStripButton tsBtn = sender as ToolStripButton;
+            if (tsBtn.Tag != null) { 
+                ToolMenuInfoModel tmInfo = tsBtn.Tag as ToolMenuInfoModel;
+                string mUrl = tmInfo.TMUrl;
+                if (!string.IsNullOrEmpty(mUrl)) {
+                    string assName = this.GetType().Assembly.GetName().Name;
+                    ObjectHandle t = Activator.CreateInstance(assName, assName + "." + mUrl);
+                    Form f = (Form)t.Unwrap();
+                    f.Tag = uName;
+                    if (tmInfo.IsTop == 0)
+                    {
+                        tcPages.AddTabFormPage(f);
+                    }
+                    else
+                    {
+                        f.StartPosition = FormStartPosition.CenterScreen;
+                        f.WindowState = FormWindowState.Normal;
+                        f.ShowDialog();
+                    }
+                }
+
+            }
+        }
+
         private void InitMainInfo()
         {
             LoginModel loginModel = this.Tag as LoginModel;
             if (loginModel != null) { 
                 urList = loginModel.URList;
                 uName = urList[0].UserName;
-                isAdmin = CheckIsAdmin();
-                List<MenuInfoModel> menuList = new List<MenuInfoModel>();
-                if (isAdmin) {
-                    menuList = menuBLL.GetMenuList("");
+                user.Text = uName;
+                loginTime.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
+                AddMenuAndToolMenus();
+            }
+        }
+
+        private void AddMenuItem(List<MenuInfoModel> mList,ToolStripMenuItem pMenu,int pId)
+        {
+            var childList = mList.Where(m => m.ParentId == pId);
+            foreach (var child in childList) { 
+                ToolStripMenuItem mi = new ToolStripMenuItem();
+                mi.Name = child.MId.ToString();
+                mi.Text = child.MName.ToString();
+                if (!string.IsNullOrEmpty(child.MKey))
+                {
+                    string sKey = child.MKey.ToString().Trim();
+                    if (sKey.Length > 1 && sKey.Substring(0,3).ToLower() == "alt")
+                    {
+                        mi.Text += $"(&{sKey.Substring(4)})";
+                        Keys k;
+                        Enum.TryParse<Keys>(sKey.Substring(4), out k);
+                        mi.ShortcutKeys = ((Keys)(Keys.Alt | k));
+
+                    }else if(sKey.Length > 1 && sKey.Substring(0,4).ToLower() == "ctrl")
+                    {
+                        Keys k;
+                        Enum.TryParse<Keys>(sKey.Substring(5), out k);
+                        mi.ShortcutKeys = ((Keys)(Keys.Control | k));
+                    } 
+                }
+                if (!string.IsNullOrEmpty(child.MUrl))
+                {
+                    mi.Tag = child;
+                }
+                if (mList.Where(m => m.ParentId == child.MId).ToList().Count ==0) {
+                    mi.Click += Mi_Click;
+                }
+                if (pMenu != null)
+                {
+                    pMenu.DropDownItems.Add(mi);
                 }else
                 {
-                    string roles = string.Join(",", urList.Select(ur => ur.RoleId));
-                    user.Text = uName;
-                    loginTime.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
-                    menuList = menuBLL.GetMenuList(roles);
+                    PSIMenus.Items.Add(mi);
+
+                }
+                AddMenuItem(mList, mi, child.MId);
+            }
+        }
+
+        private void Mi_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem mi = sender as ToolStripMenuItem;
+            if (mi.Tag != null)
+            {
+                MenuInfoModel mInfo = mi.Tag as MenuInfoModel;
+                if (!string.IsNullOrEmpty(mInfo.MUrl))
+                {
+                    string assName = this.GetType().Assembly.GetName().Name;
+                    ObjectHandle t = Activator.CreateInstance(assName, assName + "." + mInfo.MUrl);
+                    Form f = (Form)t.Unwrap();
+                    f.Tag = uName;
+                    if (mInfo.IsTop == 0)
+                    {
+                        tcPages.AddTabFormPage(f);
+                    }else
+                    {
+                        f.StartPosition = FormStartPosition.CenterScreen;
+                        f.WindowState = FormWindowState.Normal;
+                        f.ShowDialog();
+                    }
+
                 }
             }
+            
+        }
+
+        private void AddMenuAndToolMenus()
+        {
+            List<MenuInfoModel> menuList = new List<MenuInfoModel>();
+            List<ToolMenuInfoModel> toolMenuList = new List<ToolMenuInfoModel>();
+            isAdmin = CheckIsAdmin();
+            if (isAdmin)
+            {
+                menuList = menuBLL.GetMenuList("");
+                toolMenuList = toolMenuBLL.GetMenuList("");
+
+            }
+            else
+            {
+                string roles = string.Join(",", urList.Select(ur => ur.RoleId));
+
+                menuList = menuBLL.GetMenuList(roles);
+                toolMenuList = toolMenuBLL.GetMenuList(roles);
+            }
+            PSIMenus.Items.Clear();
+            PSITools.Items.Clear();
+            AddMenuItem(menuList, null, 0);
+            AddToolMenuItem(toolMenuList);
+
         }
         private bool CheckIsAdmin()
         {
@@ -75,6 +225,11 @@ namespace WFPSI
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
         }
