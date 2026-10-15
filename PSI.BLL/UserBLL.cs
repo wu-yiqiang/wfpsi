@@ -20,13 +20,14 @@ namespace PSI.BLL
             List<ViewUserRoleModel> roleList = new List<ViewUserRoleModel>();
             ViewUserRoleDAL vurDAL = new ViewUserRoleDAL();
             int userId = userDAL.Login(username, user_hashed_password);
-            Debug.WriteLine("****");
-            Debug.WriteLine(userId);
-            Debug.WriteLine("****");
             if (userId > 0) {
                 roleList = vurDAL.GetUserRoles(userId);
             }
             return roleList;
+        }
+        public List<UserInfoModel> GetUserList(string username)
+        {
+            return userDAL.GetUserList(username);
         }
     }
 }

@@ -27,5 +27,18 @@ namespace PSI.DAL
                 return 0;
             }
         }
+        public List<UserInfoModel> GetUserList(string username)
+        {
+            string strWhere = "1=1";
+            if (!string.IsNullOrEmpty(username))
+            {
+                strWhere += " AND UserName LIKE @uName";
+                
+            }
+            SqlParameter parameters = new SqlParameter("@uName", "%" + username + "%");
+            string cols = "UserId,UserName,UserPwd,UserState,Creator,CreateTime,IsDeleted";
+            return GetModelList(strWhere, cols, parameters);
+        }
+        // public int Update(UserInfoModel user) { }
     }
 }

@@ -52,15 +52,15 @@ namespace WFPSI
                 return;
             }
             if (!FormUtility.CheckOpenForm("MainForm"))
-            {   
-                MainForm mainForm = new MainForm();
+            {
+                this.Hide();
+                MainForm mainForm = new MainForm(this);
                 mainForm.Tag = new LoginModel()
                 {
                     URList = urList,
                     Login_Form = this
                 };
                 mainForm.Show();
-                this.Hide();
             }
            
         }

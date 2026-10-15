@@ -13,7 +13,7 @@ namespace WFPSI.DAL
         public List<ToolMenuInfoModel> GetToolMenuList(string roleIds)
         {
             string strWhere = "1=1 ";
-            string cols = "TMenuId,TMenuName,TMPic,TMOrder,TGroupId,TMUrl,IsTop";
+            string cols = "TMenuId,TMenuName,TMPic,TMOrder,TGroupId,TMUrl,IsTop,TMDesp";
             if (!string.IsNullOrEmpty(roleIds))
             {
                 strWhere += $" and TMenuId in (select TMenuId from RoleMenuInfos where RoleId in ({roleIds}))";

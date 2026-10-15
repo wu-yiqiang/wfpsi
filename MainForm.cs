@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WFPSI.BLL;
+using WFPSI.DAL;
 using WFPSI.FModels;
 using WinPSI;
 
@@ -19,20 +20,34 @@ namespace WFPSI
 {
     public partial class MainForm : Form
     {
-        public MainForm()
+        private Login_Form _loginForm;
+        private bool _isBackToLogin = false;
+        public MainForm(Login_Form loginForm)
         {
             InitializeComponent();
+            _loginForm = loginForm;
         }
         List<ViewUserRoleModel> urList = null;
         private MenuBLL menuBLL = new MenuBLL();
         private ToolMenuBLL toolMenuBLL = new ToolMenuBLL();
+        private SysBLL sysBLL = new SysBLL();
+
         string uName = "";
         bool isAdmin = false;
+        bool hasOpened = false;
+        private enum ToolMenuDesp
+        {
+            ExitSystem = 1,
+            ChangeActor = 2,
+            RefreshMenu = 3,
+
+        }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
             Action act = () =>
             {
+                hasOpened = sysBLL.GetOpenState(1);
                 if (this.Tag != null)
                 {
                     InitMainInfo();
@@ -96,6 +111,26 @@ namespace WFPSI
                         f.WindowState = FormWindowState.Normal;
                         f.ShowDialog();
                     }
+                }else
+                {
+                    if (tmInfo.TMDesp == ToolMenuDesp.ExitSystem.ToString())
+                    {
+                        // 退出
+                        _isBackToLogin = false;
+                        Application.Exit();
+                    }
+                    if (tmInfo.TMDesp == ToolMenuDesp.ChangeActor.ToString())
+                    {
+                        // 修改操作员
+                        _isBackToLogin = true;
+                        this.Close();
+                        _loginForm.Show();
+                    }
+                    if (tmInfo.TMDesp == ToolMenuDesp.RefreshMenu.ToString())
+                    {
+                        // 刷新系统
+                        AddMenuAndToolMenus();
+                    }
                 }
 
             }
@@ -112,7 +147,6 @@ namespace WFPSI
                 AddMenuAndToolMenus();
             }
         }
-
         private void AddMenuItem(List<MenuInfoModel> mList,ToolStripMenuItem pMenu,int pId)
         {
             var childList = mList.Where(m => m.ParentId == pId);
@@ -224,14 +258,21 @@ namespace WFPSI
 
         }
 
-        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Application.Exit();
-        }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Application.Exit();
+            if (_isBackToLogin)
+            {
+                return;
+            }
+            var result = MsgBoxHelper.MsgBoxConfirm("关闭确认", "确认退出当前系统吗？");
+            if (result == DialogResult.Yes)
+            {
+                Application.ExitThread();
+            }else
+            {
+                e.Cancel = true;
+            }
         }
     }
 }
