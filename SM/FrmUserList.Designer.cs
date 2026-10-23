@@ -79,6 +79,7 @@
             this.add.TabIndex = 3;
             this.add.Text = "新增";
             this.add.UseVisualStyleBackColor = true;
+            this.add.Click += new System.EventHandler(this.add_Click);
             // 
             // button2
             // 
@@ -117,6 +118,7 @@
             this.userDataGridView.RowTemplate.Height = 37;
             this.userDataGridView.Size = new System.Drawing.Size(1399, 624);
             this.userDataGridView.TabIndex = 8;
+            this.userDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.userDataGridView_CellContentClick);
             // 
             // UserId
             // 
@@ -154,7 +156,7 @@
             // 
             // edit
             // 
-            this.edit.HeaderText = "修改";
+            this.edit.HeaderText = "编辑";
             this.edit.MinimumWidth = 10;
             this.edit.Name = "edit";
             this.edit.Width = 200;

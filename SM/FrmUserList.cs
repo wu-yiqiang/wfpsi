@@ -1,4 +1,5 @@
-﻿using PSI.BLL;
+﻿using NPOI.SS.Formula.Functions;
+using PSI.BLL;
 using PSI.Models.DModels;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WFPSI.FModels;
 
 namespace WFPSI.SM
 {
@@ -48,6 +50,9 @@ namespace WFPSI.SM
                 {
                     var enableCell = row.Cells["enable"] as DataGridViewLinkCell;
                     enableCell.Value = userInfo.UserState == 1 ? "停用" : "启用";
+
+                    var editCell = row.Cells["edit"] as DataGridViewLinkCell;
+                    editCell.Value = "编辑";
                 }
             }
         }
@@ -55,6 +60,27 @@ namespace WFPSI.SM
         private void search_Click(object sender, EventArgs e)
         {
             LoadUserList();
+        }
+
+        private void add_Click(object sender, EventArgs e)
+        {
+            FrmUserInfo frmUserInfo = new FrmUserInfo();
+            frmUserInfo.Tag = new UserInfo() { ActType = 1, UserName = "", Reload = LoadUserList };
+            frmUserInfo.Show();
+        }
+
+        private void userDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var currentCell = userDataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex] as DataGridViewLinkCell;
+            string cellValue = currentCell.FormattedValue.ToString();
+            UserInfoModel userInfo = userDataGridView.Rows[e.RowIndex].DataBoundItem as UserInfoModel;
+            if (cellValue == "编辑")
+            {
+                FrmUserInfo frmUserInfo = new FrmUserInfo();
+                frmUserInfo.Tag = new UserInfo() { ActType = 2, UserName = userInfo.UserName, Reload = LoadUserList };
+                frmUserInfo.Show();
+            }
+
         }
     }
 }
