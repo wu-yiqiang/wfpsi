@@ -10,7 +10,7 @@ namespace WFPSI.FModels
     {
         // 1 新增 2 编辑
         public int ActType { get; set; }
-        //public int UserId { get; set; }
+        public int UserId { get; set; }
         public string UserName { get; set; }
         //public string UserPwd { get; set; }
         //public int UserState { get; set; }

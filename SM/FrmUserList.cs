@@ -65,8 +65,8 @@ namespace WFPSI.SM
         private void add_Click(object sender, EventArgs e)
         {
             FrmUserInfo frmUserInfo = new FrmUserInfo();
-            frmUserInfo.Tag = new UserInfo() { ActType = 1, UserName = "", Reload = LoadUserList };
-            frmUserInfo.Show();
+            frmUserInfo.Tag = new UserInfo() { ActType = 1, UserId = 0, Reload = LoadUserList };
+            frmUserInfo.ShowDialog();
         }
 
         private void userDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -77,8 +77,8 @@ namespace WFPSI.SM
             if (cellValue == "编辑")
             {
                 FrmUserInfo frmUserInfo = new FrmUserInfo();
-                frmUserInfo.Tag = new UserInfo() { ActType = 2, UserName = userInfo.UserName, Reload = LoadUserList };
-                frmUserInfo.Show();
+                frmUserInfo.Tag = new UserInfo() { ActType = 2,UserId=userInfo.UserId, Reload = LoadUserList };
+                frmUserInfo.ShowDialog();
             }
 
         }

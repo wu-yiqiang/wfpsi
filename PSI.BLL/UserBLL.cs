@@ -15,6 +15,7 @@ namespace PSI.BLL
     public class UserBLL:BaseBLL<UserInfoModel>
     {
         UserDAL userDAL = new DAL.UserDAL();
+        ViewUserRoleDAL vUserRole = new ViewUserRoleDAL();
         public List<ViewUserRoleModel> Login(string username, string user_hashed_password)
         {
             List<ViewUserRoleModel> roleList = new List<ViewUserRoleModel>();
@@ -28,6 +29,37 @@ namespace PSI.BLL
         public List<UserInfoModel> GetUserList(string username)
         {
             return userDAL.GetUserList(username);
+        }
+        public UserInfoModel GetUserInfoById(int userId)
+        {
+            return userDAL.GetUserInfoById(userId);
+        }
+        public List<ViewUserRoleModel> GetUserRoles(int userId) { 
+            return vUserRole.GetUserRoles(userId);
+        }
+        public bool AddUser(UserInfoModel user, List<UserRoleInfoModel> urList)
+        {
+            try
+            {
+                userDAL.AddUser(user, urList);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public bool EditUser(UserInfoModel user, List<UserRoleInfoModel> urList)
+        {
+            try
+            {
+                userDAL.EditUser(user, urList);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

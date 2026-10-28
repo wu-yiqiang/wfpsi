@@ -36,8 +36,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.PSIMenus = new System.Windows.Forms.MenuStrip();
             this.PSITools = new System.Windows.Forms.ToolStrip();
-            this.tcPages = new System.Windows.Forms.TabControl();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.tcPages = new System.Windows.Forms.TabControl();
             this.panel1.SuspendLayout();
             this.PSITools.SuspendLayout();
             this.SuspendLayout();
@@ -116,14 +116,6 @@
             this.PSITools.TabIndex = 3;
             this.PSITools.Text = "toolStrip1";
             // 
-            // tcPages
-            // 
-            this.tcPages.Location = new System.Drawing.Point(13, 96);
-            this.tcPages.Name = "tcPages";
-            this.tcPages.SelectedIndex = 0;
-            this.tcPages.Size = new System.Drawing.Size(1398, 641);
-            this.tcPages.TabIndex = 4;
-            // 
             // toolStripButton1
             // 
             this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -132,6 +124,14 @@
             this.toolStripButton1.Name = "toolStripButton1";
             this.toolStripButton1.Size = new System.Drawing.Size(46, 24);
             this.toolStripButton1.Text = "toolStripButton1";
+            // 
+            // tcPages
+            // 
+            this.tcPages.Location = new System.Drawing.Point(13, 96);
+            this.tcPages.Name = "tcPages";
+            this.tcPages.SelectedIndex = 0;
+            this.tcPages.Size = new System.Drawing.Size(1398, 641);
+            this.tcPages.TabIndex = 4;
             // 
             // MainForm
             // 
@@ -147,6 +147,7 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "鼎飞进销存管理系统";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.panel1.ResumeLayout(false);

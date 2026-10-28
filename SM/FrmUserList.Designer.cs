@@ -116,7 +116,7 @@
             this.userDataGridView.Name = "userDataGridView";
             this.userDataGridView.RowHeadersWidth = 82;
             this.userDataGridView.RowTemplate.Height = 37;
-            this.userDataGridView.Size = new System.Drawing.Size(1399, 624);
+            this.userDataGridView.Size = new System.Drawing.Size(1466, 682);
             this.userDataGridView.TabIndex = 8;
             this.userDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.userDataGridView_CellContentClick);
             // 
@@ -172,7 +172,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1436, 780);
+            this.ClientSize = new System.Drawing.Size(1503, 838);
             this.Controls.Add(this.userDataGridView);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -182,7 +182,9 @@
             this.Controls.Add(this.usernameInput);
             this.Name = "FrmUserList";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "用户管理";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FrmUserList_Load);
             ((System.ComponentModel.ISupportInitialize)(this.userDataGridView)).EndInit();
             this.ResumeLayout(false);
